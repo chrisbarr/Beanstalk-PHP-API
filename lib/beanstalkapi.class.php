@@ -1405,6 +1405,30 @@ class BeanstalkAPI {
 	}
 
 	/**
+	 * Returns a listing of releases for a specific repos, and optionally environment
+	 * @param integer $repo_id
+	 * @param integer $environment_id [optional] Optional server environment filtering
+	 * @param integer $page [optional] Current page of results
+	 * @param integer $per_page [optional] Results per page - default 10, max 50
+	 * @return SimpleXmlElement|array
+	 */
+	public function find_all_repository_releases($repo_id, $environment_id = NULL, $page = 1, $per_page = 10) {
+		if(empty($repo_id))
+			throw new InvalidArgumentException("Repository ID required");
+		
+		$per_page = intval($per_page) > 50 ? 50 : intval($per_page);
+		
+		if(is_null($environment_id))
+		{
+			return $this->_execute_curl();
+		}
+		else
+		{
+			return $this->_execute_curl();
+		}
+	}
+
+	/**
 	 * Returns a Beanstalk repository's release based on a specific release id
 	 *
 	 * @link http://api.beanstalkapp.com/release.html
